@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Conteo de Útiles</title>
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <!-- iOS -->
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <style>
+    body{font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:#0b1020;color:#e6edf3}
+    .wrap{max-width:720px;margin:0 auto;padding:16px}
+    header{display:flex;justify-content:space-between;align-items:center;padding:12px 0}
+    .card{background:#11172a;border:1px solid #24324a;border-radius:16px;padding:16px}
+    input,button{font-size:16px}
+    input{width:100%;padding:12px;border-radius:12px;border:1px solid #2a3a57;background:#0e1426;color:#e6edf3}
+    .row{display:grid;grid-template-columns:1fr 110px 110px;gap:8px}
+    .list{margin-top:12px}
+    .item{display:grid;grid-template-columns:1fr 90px 40px;gap:8px;align-items:center;padding:10px;border-bottom:1px solid #22314b}
+    .pill{background:#0ea5e922;color:#67e8f9;border:1px solid #0ea5e9;border-radius:999px;padding:4px 10px;justify-self:center}
+    .ghost{background:transparent;border:1px dashed #2a3a57;color:#a6b3c7;padding:10px;border-radius:12px}
+    .primary{background:#0ea5e9;border:0;color:#00111a;padding:12px;border-radius:12px;font-weight:700;cursor:pointer}
+    .danger{background:#ef4444;border:0;color:white;padding:8px 10px;border-radius:10px;cursor:pointer}
+    .bar{display:flex;gap:8px;margin-top:12px}
+    #installBtn{display:none}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>🧽 Conteo de Útiles</h1>
+      <button id="installBtn" class="ghost">➕ Instalar</button>
+    </header>
+
+    <div class="card">
+      <div class="row">
+        <input id="nombre" placeholder="Ej: Nova, Confort, Jabon líquido…" />
+        <input id="cantidad" type="number" min="0" placeholder="Cantidad" />
+        <button id="agregar" class="primary">Agregar</button>
+      </div>
+
+      <div class="bar">
+        <button id="exportar" class="ghost">⬇️ Exportar JSON</button>
+        <button id="vaciar" class="ghost">🗑️ Vaciar todo</button>
+      </div>
+
+      <div id="lista" class="list"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // Registro del Service Worker (PWA)
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js');
+      });
+    }
+  </script>
+</body>
+</html>
